@@ -1,0 +1,600 @@
+<!doctype html>
+<html>
+    <head>
+        <title>FetLife</title>
+        <script type="text/javascript" src="data.js"></script>
+        <script>
+			function myload()
+			{
+				var mydata = JSON.parse(data);
+				var name = 	mydata.name;
+				var location = mydata.location;
+				var relationship = mydata.relationship_status;
+				var orientation = mydata.orientation;
+				var about_me = mydata.about_me;
+				var active = mydata.active;
+				var is_lookingfor = mydata.is_lookingfor;
+				var pics_count = parseInt(mydata.img_count);
+				var grps_join = mydata.groups;
+				
+				var myul = document.getElementById("ul"); 
+				var myul1 = document.getElementById("ul1");
+				var pics_lic = document.getElementById("imges");
+				var grps_lis = document.getElementById("grps");
+				var wall_lis = document.getElementById("wall");
+				var create_ul = document.createElement("ul");
+				var posts_lis = document.getElementById("posts");
+				var create_ul1 = document.createElement("ul");
+				var conver_list = document.getElementById("conver");
+				if(relationship == ""){
+					relationship = "Not Found"
+				}
+				if(active == ""){
+					active = "Not Found"
+				}
+				if(is_lookingfor == ""){
+					is_lookingfor = "Not Found"
+				}
+				
+				// gerneral Info
+				
+				document.getElementById("head").innerHTML = name;
+				document.getElementById("loc").innerHTML = location;
+				document.getElementById("orien").innerHTML = orientation;
+				document.getElementById("act").innerHTML = active;
+				document.getElementById("islook").innerHTML = is_lookingfor;
+				
+				// about me
+				
+				for(var i=0;i<mydata.about_me.length;i++){
+					var li = document.createElement("li");
+					li.innerHTML = mydata.about_me[i];
+					li.style.paddingTop='5px';
+					li.style.fontSize='18px';
+					
+					myul.appendChild(li);
+				}
+				
+				
+				
+				// Activities List
+				
+				for(var i=0; i<mydata.activites_list.length;i++)
+				{
+					var li = document.createElement("li");
+					li.innerHTML = mydata.activites_list[i];
+					li.style.paddingTop='5px';
+					li.style.fontSize='18px';
+					if(i%2==0){
+						li.style.backgroundColor='#dddddd';
+					}
+					else{
+						li.style.backgroundColor='none';
+					}
+					
+					myul1.appendChild(li);
+				}
+				
+				//Groups Activities
+				
+				for(var i=0; i<mydata.groups.length;i++)
+				{
+					var li = document.createElement("li");
+					li.innerHTML = mydata.groups[i];
+					li.style.paddingTop='5px';
+					li.style.fontSize='18px';
+					
+					grps_lis.appendChild(li);
+				}
+				
+				//goups lead
+				
+				var grps_lead = document.getElementById("grps_l")
+				for(var i=0; i<mydata.group_leads.length;i++)
+				{
+					var li = document.createElement("li");
+					li.innerHTML = mydata.group_leads[i];
+					li.style.paddingTop='5px';
+					li.style.fontSize='18px';
+					
+					grps_lead.appendChild(li);
+				}
+				
+				//event going to  lead
+				
+				var event_going_to = document.getElementById("events")
+				for(var i=0; i<mydata.events_going_to.length;i++)
+				{
+					var li = document.createElement("li");
+					li.innerHTML = mydata.events_going_to[i];
+					li.style.paddingTop='5px';
+					li.style.fontSize='18px';
+					
+					event_going_to.appendChild(li);
+				}
+				
+				//event may bee going to  lead
+				
+				var event_may_going_to = document.getElementById("events_g")
+				for(var i=0; i<mydata.events_may_be_going_to.length;i++)
+				{
+					var li = document.createElement("li");
+					li.innerHTML = mydata.events_may_be_going_to[i];
+					li.style.paddingTop='5px';
+					li.style.fontSize='18px';
+					
+					event_may_going_to.appendChild(li);
+				}
+				
+				
+				// Friends
+				// Friend data
+				
+				var friends = document.getElementById("frnd");
+				var create_ul_friends = document.createElement("ul");
+				for(var i=0; i<mydata.list_friends.length;i++)
+				{
+					var li = document.createElement("li");
+					var mydata1 = mydata.list_friends[i];
+					var create_div1 = document.createElement("div");
+					
+					create_div1.innerHTML = "<h3>"+mydata1.name+"</h3>" + "<p>"+mydata1.loc+"</p>"+"<p>"+mydata1.posts_pic_vids+"</p>";
+					
+					create_div1.style.paddingLeft="10px";
+					
+					
+					li.appendChild(create_div1);
+					
+					li.style.paddingTop='-13px';
+					li.style.fontSize='14px';
+					//li.style.float="left";
+					create_ul_friends.appendChild(li);
+					friends.appendChild(create_ul_friends);
+				}
+				
+				// Mutual Friends Data
+				
+				var mutual_friends = document.getElementById("m_frnd");
+				var create_ul_mutual_friends = document.createElement("ul");
+				for(var i=0; i<mydata.mutual_friends.length;i++)
+				{
+					var li = document.createElement("li");
+					var mydata1 = mydata.mutual_friends[i];
+					var create_div1 = document.createElement("div");
+					
+					create_div1.innerHTML = "<h3>"+mydata1.name+"</h3>" + "<p>"+mydata1.loc+"</p>"+"<p>"+mydata1.posts_pic_vids+"</p>";
+					
+					create_div1.style.paddingLeft="10px";
+					
+					
+					li.appendChild(create_div1);
+					
+					li.style.paddingTop='-13px';
+					li.style.fontSize='14px';
+					//li.style.float="left";
+					
+					create_ul_mutual_friends.appendChild(li);
+				
+					mutual_friends.appendChild(create_ul_mutual_friends);
+				}
+				
+				//Following Friends
+				
+				var following_friends = document.getElementById("foll_fr");
+				var create_ul_following_friends = document.createElement("ul");
+				for(var i=0; i<mydata.following_friends.length;i++)
+				{
+					var li = document.createElement("li");
+					var mydata1 = mydata.following_friends[i];
+					var create_div1 = document.createElement("div");
+					
+					create_div1.innerHTML = "<h3>"+mydata1.name+"</h3>" + "<p>"+mydata1.loc+"</p>"+"<p>"+mydata1.posts_pic_vids+"</p>";
+					
+					create_div1.style.paddingLeft="10px";
+					
+					li.appendChild(create_div1);
+					
+					li.style.paddingTop='-13px';
+					li.style.fontSize='14px';
+					create_ul_following_friends.appendChild(li);
+					following_friends.appendChild(create_ul_following_friends);
+					//following_friends.style.marginBottom="100px";
+				}
+				
+				// Followers  Friends
+				
+				var follower_friends = document.getElementById("fwr_fr");
+				var create_ul_followers_friends = document.createElement("ul");
+				for(var i=0; i<mydata.follower_friends.length;i++)
+				{
+					var li = document.createElement("li");
+					var mydata1 = mydata.follower_friends[i];
+					
+					var create_div1 = document.createElement("div");
+					
+					create_div1.innerHTML = "<h3>"+mydata1.name+"</h3>" + "<p>"+mydata1.loc+"</p>"+"<p>"+mydata1.posts_pic_vids+"</p>";
+					
+					create_div1.style.paddingLeft="10px";
+					
+					
+					li.appendChild(create_div1);
+					
+					li.style.paddingTop='-13px';
+					li.style.fontSize='14px';
+					//li.style.float="left";
+					
+					create_ul_followers_friends.appendChild(li);
+				
+					follower_friends.appendChild(create_ul_followers_friends);
+					follower_friends.style.marginBottom="100px";
+				}
+				
+				// Wall Messages
+				
+				for( var i=0; i<mydata.wall_list.length;i++){
+					
+					var create_li = document.createElement("li");
+					var create_p = document.createElement("p");
+					var create_h = document.createElement("h3");
+					var wall_msgs = mydata.wall_list[i];
+					var wall_messager = wall_msgs.wall_message_given_by;
+					console.log(wall_messager)
+					var message = wall_msgs.wall_message;
+					create_h.innerHTML =wall_messager;
+					create_p.innerHTML =message;
+					create_p.style.paddingTop='5px';
+					create_p.style.paddingLeft='15px';
+					create_p.style.fontSize='18px';
+					create_li.appendChild(create_h);
+					create_li.appendChild(create_p);
+					create_ul.appendChild(create_li);
+					
+					
+					wall_lis.appendChild(create_ul);
+				}
+				
+				//Conversations
+				
+				var create_ul2 = document.createElement("ul");
+				for( var i=0; i<mydata.conv_list.length;i++){
+					
+					var create_li = document.createElement("li");
+					var create_p = document.createElement("p");
+					var create_h3 = document.createElement("h3");
+					var create_h31 = document.createElement("h3");
+					var con_msgs = mydata.conv_list[i];
+					var title = con_msgs.title;
+					create_h3.innerHTML = title;
+					create_li.appendChild(create_h3);
+					var messagesss_data = con_msgs.conversations;
+					console.log(messagesss_data)
+					var comments_html = document.createElement("div");
+					for(var j=0;j<messagesss_data.length;j++){
+						var message_data = messagesss_data[j];
+						var sender = message_data.sender_name;
+						var message = message_data.message;
+						
+						var comment_html = document.createElement("div");
+						comment_html.innerHTML = "<div>Sender: " + message_data.sender_name + " </div>" +
+							"<div>Message: " + message_data.message + " </div>";
+						console.log(comment_html)
+						comment_html.style.paddingLeft="30px";
+						comment_html.style.paddingBottom="30px";
+						comment_html.style.paddingTop="10px";
+						comments_html.appendChild(comment_html);
+					
+					}
+					create_li.appendChild(comments_html);
+					create_ul2.appendChild(create_li);
+					conver_list.appendChild(create_ul2);
+					
+					
+					
+				}
+				
+				//Pictures
+				
+				for(var i = 0 ;i<pics_count;i++){
+					var imgs = document.createElement("img");
+					
+					var img_data = mydata.imgs_list[i];
+					imgs.src="images/"+img_data.img+".png";
+					var img_data_comments = img_data.comments;
+					var comments_html = document.createElement("div");
+					comments_html.innerHTML= "Comments on this Picture Are Given Below";
+					for(var j = 0; j< img_data_comments.length; j++)
+					{
+						var comment = img_data_comments[j];
+						var comment_html = document.createElement("div");
+						comment_html.innerHTML = "<div>Given By: " + comment.comment_given_by + " </div>" +
+							"<div>Date: " + comment.comment_date + " </div>"+
+							"<div>Description: " + comment.comment_description + " </div>";
+						
+						comments_html.appendChild(comment_html);
+						comment_html.style.paddingLeft="30px";
+						comment_html.style.paddingBottom="30px";
+						comment_html.style.paddingTop="10px";
+					}
+					img_html = document.createElement("div");
+					img_html.appendChild(imgs);
+					img_html.appendChild(comments_html);
+					
+					pics_lic.appendChild(img_html);
+				}
+				
+				//Posts
+				
+				for(var i = 0 ;i<mydata.posts_list.length;i++){
+					var create_li = document.createElement("li");
+					var create_h3 = document.createElement("h3");
+					var create_h4 = document.createElement("h4");
+					var create_p = document.createElement("p");
+					var create_p1 =document.createElement("p");
+					var posts_data = mydata.posts_list[i];
+					var post_title = posts_data.title;
+					console.log(posts_data)
+					var post_time = posts_data.time;
+					var post_description = posts_data.description;
+					create_h3.innerHTML =post_title;
+					create_p1.innerHTML = post_time;
+					create_p.innerHTML = post_description;					
+					
+					create_p1.style.paddingTop='5px';
+					create_p1.style.paddingLeft='15px';
+					create_p1.style.fontSize='16px';
+					
+					create_p.style.paddingTop='5px';
+					create_p.style.paddingLeft='15px';
+					create_p.style.fontSize='18px';
+					
+					create_li.appendChild(create_h3)
+					create_li.appendChild(create_p1)
+					create_li.appendChild(create_p)
+					var post_comments = posts_data.comments;
+					var comments_html = document.createElement("div");
+					comments_html.innerHTML= "Comments on this Post Are Given Below";
+					for(var j = 0; j< post_comments.length; j++)
+					{
+						var comment = post_comments[j];
+						var comment_html = document.createElement("div");
+						comment_html.innerHTML = "<div>Given By: " + comment.comment_given_by + " </div>" +
+							"<div>Date: " + comment.comment_date + " </div>"+
+							"<div>Description: " + comment.comment_description + " </div>";
+						
+						comment_html.style.paddingLeft="30px";
+						comment_html.style.paddingBottom="30px";
+						comment_html.style.paddingTop="10px";
+						comments_html.appendChild(comment_html);
+						
+					}
+					create_li.appendChild(comments_html);
+					create_ul1.appendChild(create_li);
+					posts_lis.appendChild(create_ul1);
+				}
+				
+				// Function For Navbaar
+				
+				var header = document.getElementById("myUl");
+				var btns = header.getElementsByClassName("li_a");
+				for (var i = 0; i < btns.length; i++) {
+				  btns[i].addEventListener("click", function() {
+				  var current = document.getElementsByClassName("active");
+				  current[0].className = current[0].className.replace(" active", "");
+				  this.className += " active";
+				  });
+				}
+
+			}
+			
+			
+		</script>
+		<style>
+			table {
+				font-family: arial, sans-serif;
+				border-collapse: collapse;
+				width: 80%;
+				
+			  }
+
+			  td, th {
+				border: 1px solid #dddddd;
+				text-align: left;
+				padding: 8px;
+			  }
+			  .ul_my {
+			  list-style-type: none;
+			  margin: 0;
+			  padding: 0;
+			  width: 20%;
+			  background-color: #f1f1f1;
+			  position: fixed;
+			  height: 100%;
+			  overflow: auto;
+			  		  
+			}
+
+			.li_a {
+			  display: block;
+			  color: #000;
+			  padding: 8px 16px;
+			  text-decoration: none;
+			}
+
+			.li_a.active {
+			  background-color: black;
+			  color: white;
+			}
+
+			.li_a:hover:not(.active) {
+			  background-color: #555;
+			  color: white;
+			}
+</style>
+ </head>
+    <body onload="myload()">
+		<ul class="ul_my" id="myUl" style="margin-top: -8px">
+		  <h1 align="center">FetLife User Data</h1>
+		  <li ><a class="li_a active" href="#generol_info">General Info</a></li>
+		  <li ><a class="li_a" href="#about">About Me</a></li>
+		  <li ><a class="li_a" href="#latest_activities">Latest Activities</a></li>
+		  <li ><a class="li_a" href="#Groups Joined">Groups Joined</a></li>
+		  <li ><a class="li_a" href="#Groups Leading">Groups Leading</a></li>
+		  <li ><a class="li_a" href="#Events Going">Events Going</a></li>
+		  <li ><a class="li_a" href="#Events May">Events May Be Going</a></li>
+		  <li ><a class="li_a" href="#Wall Messages">Wall Messages</a></li>
+		  <li ><a class="li_a" href="#Posts  Section">Posts  Section</a></li>
+		  <li ><a class="li_a" href="#Pictures Section">Pictures Section</a></li>
+		  <li ><a class="li_a" href="#Friends">Friends</a></li>
+		  <li ><a class="li_a" href="#Mutual Friends">Mutual Friends</a></li>
+		  <li ><a class="li_a" href="#Following ">Following </a></li>
+		  <li ><a class="li_a" href="#Followers">Followers</a></li>
+		  <li ><a class="li_a" href="#Conversation Messages">Conversation Messages</a></li>
+		</ul>
+	<div style="margin-left:20%;padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:1px;height:1000px;" id="home">
+			<div id="generol_info">
+				<div style="margin-right:30px;background-color: lightgrey; height: 40px">
+					<h2 style="padding-top: 5px">General Information</h2>
+				</div>
+				<div align="justify" style="width:100%;margin-top:-20px">
+					<h2 style="float: left;margin-right: 5px" >Name :  </h2>
+					<p id="head"  style=" padding-top: 20px; font-size: 25px"></p>
+				</div>
+				<div align="justify" style="width: 100%">
+					<div>
+						<h2 style="float: left;margin-right: 5px">Location:</h2>
+						<p  id="loc" style=" padding-top: 20px; font-size: 25px"></p>
+
+					</div>
+				</div>	
+				<div align="justify" style="width: 100%">
+					<div>
+						<h2 style="float: left;margin-right: 5px">Orientation:</h2>
+						<p  id="orien" style=" padding-top: 20px; font-size: 25px"></p>	
+					</div>
+				</div>
+				<div align="justify" style="width: 100%">
+					<div>
+						<h2 style="float: left;margin-right: 5px">Active:</h2>
+						<p  id="act" style=" padding-top: 20px; font-size: 25px"></p>	
+					</div>
+				</div>
+				<div align="justify" style="width: 100%">
+					<div>
+						<h2 style="float: left;margin-right: 5px">Is Looking For:</h2>
+						<p  id="islook" style=" padding-top: 20px; font-size: 25px"></p>	
+					</div>
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="about">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is About Me Section:</h2>
+						<ul id="ul"></ul>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="latest_activities">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Latest Activities Section:</h2>
+						<ul id="ul1"></ul>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Groups Joined">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Groups Joined Section:</h2>
+						<ul id="grps">
+
+						</ul>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Groups Leading">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Groups Leading Section:</h2>
+						<ul id="grps_l">
+
+						</ul>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Events Going">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Events Going To held Section:</h2>
+						<ul id="events">
+
+						</ul>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Events May">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Events May be Going To held Section:</h2>
+						<ul id="events_g">
+
+						</ul>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Wall Messages">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Wall Messages Section:</h2>
+						<div id="wall">
+
+						</div>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Friends">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">Friends Section:</h2>
+						<div id="frnd">
+
+						</div>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Mutual Friends">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">Mutual Friends Section:</h2>
+						<div id="m_frnd">
+
+						</div>	
+				</div>
+			</div>	
+			<div align="justify" style="width: 100%" id="Following">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">Following Friends Section:</h2>
+						<div id="foll_fr">
+
+						</div>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Followers">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">Followers Friends Section:</h2>
+						<div id="fwr_fr">
+
+						</div>	
+				</div>
+			</div>	
+			<div align="justify" style="width: 100%" id="Conversation Messages">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Conversation Messages:</h2>
+						<div id="conver">
+
+						</div>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Posts  Section">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Posts  Section:</h2>
+						<div id="posts">
+
+						</div>	
+				</div>
+			</div>
+			<div align="justify" style="width: 100%" id="Pictures Section">
+				<div>
+					<h2 style="margin-right:30px;background-color: lightgrey">This is Pictures Section:</h2>
+						<div id="imges">
+
+						</div>	
+				</div>
+			</div>
+		</div>
+	</body>	
+		
+    
+</html>
